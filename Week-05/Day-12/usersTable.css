@@ -1,0 +1,36 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+img{
+    width: 50px;
+    border-radius: 50%;
+}
+
+table{
+    border: 3px solid black;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 30px;
+}
+
+h1{
+    color: rgb(250, 242, 242);
+}
+th,td{
+    padding: 5px;
+}
+
+th{
+    background-color: aqua;
+}
+
+.attributes{
+    background-color: skyblue;
+}
+
+.even{
+    background-color: rgb(211, 249, 241);
+}
