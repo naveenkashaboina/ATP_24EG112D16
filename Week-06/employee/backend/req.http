@@ -1,0 +1,29 @@
+###create employee
+POST http://localhost:3000/employee-api/employee
+Content-Type: application/json
+
+{
+  "name":"Rithesh",
+  "email":"rithesh@gmail.com",
+  "mobile":"8074503383",
+  "designation":"Student",
+  "companyName":"Anurag University"
+}
+
+###read all employees
+GET http://localhost:3000/employee-api/employees
+
+###Edit employee
+PUT http://localhost:3000/employee-api/employee/69ca1809d2417e8f09c07cf0
+Content-Type: application/json
+
+{
+  "name":"lokesh",
+  "email":"vakitilokesh34@gmail.com",
+  "mobile":"8964362737",
+  "designation":"student",
+  "companyName":"ANURAG UNIVERSITY"
+}
+
+###Delete employee
+DELETE http://localhost:3000/employee-api/employee/69ca1809d2417e8f09c07cf0
