@@ -5,7 +5,7 @@ export const counterContextObj = createContext();
 
 function ContextProvider({children}) {
   //state
-  const [counter,setCounter] = useState([0]);
+  const [counter,setCounter] = useState(0);
   //functions to change state
   const increment=()=>{
     setCounter(counter+1);
