@@ -1,29 +1,29 @@
-import { useContext } from "react";
-import { counterContextObj } from "../contexts/contextProvider";
-import { useCounterStore } from "../store/CounterStore";
-import Test from "./Test";
+import { useContext } from "react"
+import { counterContextObj } from "../Contexts/ContextProvider"
+import Test from "./Test"
+import { useCounterStore } from "../Store/CounterStore.js"
 
 function Home() {
-  console.log("Home");
-  //call useCounterStore hook to get state of Zustand store
-  let {newCounter,incrementCounter,decrementCounter}= useCounterStore();
- 
-  const {counter,counter1,changeCounter,changeCounter1}= useContext(counterContextObj);
+
+  //call useCounterStore hook to get state of zustand store
+  const newCounter=useCounterStore((state)=>state.newCounter);
+  const incrementCounter=useCounterStore((state)=>state.incrementCounter);
+  const ChangeCount=useCounterStore((state)=>state.ChangeCount);
+
+  const {counter,changeCounter}=useContext(counterContextObj)
+  console.log("Home")
+
   return (
     <div>
-    <div>
       <h1 className="text-4xl">Counter:{counter}</h1>
-      <button onClick={changeCounter} className="bg-amber-400 p-3">+</button>
-    </div>
-    <div>
-      <h1 className="text-4xl">NewCounter:{newCounter}</h1>
-      <button onClick={incrementCounter} className="bg-blue-400 p-3">+</button>
-      <button onClick={decrementCounter} className="bg-amber-400 p-3">-</button>
-    </div>
-    <Test/>
-    </div>
+      <button onClick={changeCounter} className="bg-blue-300 p-5">Change</button>
 
+      <h1 className="text-4xl">New Counter:{newCounter}</h1>
+      <button onClick={incrementCounter} className="bg-gray-300 p-5">increment Counter</button>
+
+      <Test/>
+    </div>
   )
 }
 
-export default Home;
+export default Home

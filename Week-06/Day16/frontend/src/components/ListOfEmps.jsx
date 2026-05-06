@@ -1,62 +1,67 @@
-import { useState, useEffect } from "react";
+import { useState,useEffect } from "react"
 import { useNavigate } from "react-router";
 import axios from "axios";
 
 function ListOfEmps() {
-  const [emps, setEmps] = useState([]);
-  const navigate = useNavigate();
 
-  const gotoEmployee = (empObj)=>{
-    //navigate tp/ employee
+  const [emps,setEmps]=useState([]);
+  const navigate=useNavigate();
+
+  const gotoEmployee=(empObj)=>{
+    //navigate to employee along with selected employee object
     navigate("/employee",{state:empObj});
   }
-  
-  const gotoEditEmployee = (empObj)=>{
-    //navigate to /employee along with selected emp obj
-    navigate("/edit-emp",{state:empObj});
+
+  const gotoEditEmployee=(empobj)=>{
+    //navigate to employee along with selected employee object
+    navigate("/edit-emp",{state:empobj});
   }
-  
-  const deleteEmpByID = async(id)=>{
-    let res = await axios.delete(`http://localhost:3000/employee-api/employee/${id}`);
-    if(res.status===200){
-      //get latest emps data;
+
+  //delete employee
+  const deleteEmpById=async (id)=>{
+    let res=await axios.delete(`http://localhost:5000/employee-api/employee/${state._id}`)
+    if(res.status==200){
+      //get employees
       getEmps();
     }
   }
-  //get all emps
+
+  //get all employees
   async function getEmps() {
-      let res = await fetch("http://localhost:3000/employee-api/employees");
-      if (res.status === 200) {
-        let resObj = await res.json();
-        console.log((resObj))
-        setEmps(resObj.payLoad);
+      let res=await axios.get("http://localhost:5000/employee-api/employee");
+      if(res.status==200){
+        let resObj=await res.data;
+        setEmps(resObj.payload);
       }
     }
-  useEffect(() => {
-  
+
+  //get all employees on component loading
+  useEffect(()=>{
     getEmps();
-  }, []);
+  },[])
 
   return (
     <div>
-      <h1 className="text-4xl text-center mb-4">List of Employees</h1>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-        {emps?.map((empObj) => (
-          <div key={empObj._id} className=" bg-white p-5">
-            <p>{empObj.email}</p>
-            <p className="mb-3">{empObj.name}</p>
-            <div className="flex justify-around gap-2">
-        <button onClick={()=>gotoEmployee(empObj)} className="bg-green-400 p-2 rounded-2xl text-white">view</button>
-        <button onClick={()=>gotoEditEmployee(empObj)} className="bg-orange-400 p-2 rounded-2xl text-white">Edit</button>
-        <button onClick={()=>deleteEmpByID(empObj._id)} className="bg-red-400 p-2 rounded-2xl text-white">Delete</button>
+      <h2 className="text-4xl text-center">List Of Employees</h2>
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-8">
+        {
+            emps.map((empObj)=>(
+                <div key={empObj._id} className="bg-white p-5 rounded-2xl text-2xl text-center">
+                    <p className="mt-2">{empObj.email}</p>
+                    <p className="mb-5">{empObj.name}</p>
+
+                    {/* 3 buttons */}
+                    <div>
+                      <button onClick={()=>gotoEmployee(empObj)} className="bg-green-600 p-2 rounded-2xl text-white">View</button>
+                      <button onClick={()=>gotoEditEmployee(empObj)} className="bg-orange-600 p-2 rounded-2xl text-white">Edit</button>
+                      <button onClick={()=>deleteEmpById(id)} className="bg-red-600 p-2 rounded-2xl text-white">Delete</button>
+                    </div>
+                </div>
+            ))
+        }
       </div>
-          </div>
-        ))}
-    
-      
     </div>
-    </div>
-  );
+  )
 }
 
-export default ListOfEmps;
+export default ListOfEmps

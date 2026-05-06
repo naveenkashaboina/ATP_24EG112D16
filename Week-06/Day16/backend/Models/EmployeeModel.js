@@ -1,30 +1,33 @@
 import { Schema,model } from "mongoose";
-const EmployeeSchema= Schema({
- name:{
-  type:String,
-  required:[true,"name is required"]
- },
- email:{
-  type:String,
-  required:[true,"email is required"],
-  unique:true
- },
- mobile:{
-  type:Number,
-  required:[true,"mobileno is required"],
-  minLength:10,
-  maxLength:10
- },
- designation:{
-  type:String,
-  required:[true,"designation is required"]
- },
- companyName:{
- type:String,
- required:[true,"company name is required"],
- minLength:4
- }
 
-}
-);
-export const EmployeeModel = new  model("Employee",EmployeeSchema);
+const employeeSchema=new Schema({
+    name:{
+        type:String,
+        required:[true,"Employee Name required"],
+    },
+    email:{
+        type:String,
+        required:[true,"Email is required"],
+        unique:true
+    },
+    mobile:{
+        type:Number,
+        required:[true]
+    },
+    designation:{
+        type:String,
+        required:[true,"designation of employee is required"],
+    },
+    companyName:{
+        type:String,
+        required:[true,"Name of the company is required"],
+    }
+},
+{
+    strict:"throw",
+    versionKey:false,
+    timestamps:true,
+})
+
+//export model
+export const EmployeeModel=model("employee",employeeSchema)
