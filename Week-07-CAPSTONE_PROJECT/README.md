@@ -1,4 +1,4 @@
-# 📝 Blog App (MERN Stack)
+# Blog App (MERN Stack)
 
 A full-stack blogging platform built using the **MERN stack (MongoDB, Express, React, Node.js)**.  
 It supports role-based access (User, Author, Admin), authentication, article management, comments, and admin controls.
