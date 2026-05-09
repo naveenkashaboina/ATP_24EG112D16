@@ -18,8 +18,11 @@ adminApp.get("/articles",verifyToken("ADMIN"),async(req,res)=>{
 adminApp.put("/state", verifyToken("ADMIN"), async (req, res) => {
   let { mail, toBeActive } = req.body;
 
-  // Convert string to boolean
-  toBeActive = toBeActive === "true";
+  // Handle both boolean (from frontend) and string "true"/"false" safely
+  if (typeof toBeActive === "string") {
+    toBeActive = toBeActive === "true";
+  }
+  // if already boolean, use as-is
 
   const userDoc = await userModel.findOne({ email: mail });
   if (!userDoc)
