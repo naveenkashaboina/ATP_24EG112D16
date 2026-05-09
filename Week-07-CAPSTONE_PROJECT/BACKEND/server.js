@@ -15,7 +15,7 @@ config();
 const app = exp();
 //enable cors
 app.use(cors({
-  origin:['blog-frontend-alpha-lovat.vercel.app'],
+  origin:['https://blog-frontend-alpha-lovat.vercel.app'],
   credentials:true
 }))
 //add cookie parser middeleware
