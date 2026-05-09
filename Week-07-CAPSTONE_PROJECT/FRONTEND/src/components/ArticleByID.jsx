@@ -42,7 +42,8 @@ function ArticleByID() {
   const [article, setArticle] = useState(location.state || null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [commentLoading, setCommentLoading] = useState(false);
+const [toggleLoading, setToggleLoading]   = useState(false);
   useEffect(() => {
     //if aticle is transferred, then use it
     if (article) return;
