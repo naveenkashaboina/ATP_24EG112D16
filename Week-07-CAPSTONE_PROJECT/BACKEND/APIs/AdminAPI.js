@@ -2,7 +2,7 @@
 
 import exp from 'express'
 export const adminApp=exp.Router()
-import { verifyToken } from '../middleWares/VerifyToken.js'
+import { verifyToken } from '../middlewares/VerifyToken.js'
 import { articleModel } from '../models/ArticleModel.js'
 import { userModel } from '../models/UserModel.js'
 
