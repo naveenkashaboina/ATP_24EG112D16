@@ -75,9 +75,11 @@ function Login() {
             </a>
           </div>
 
-          <button type="submit" className={submitBtn}>Sign In</button>
+          <button type="submit" className={submitBtn} disabled={loading}>
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
         </form>
-
+        
         <p className={`${mutedText} text-center mt-5`}>
           Don't have an account?{" "}
           <NavLink to="/register" className={linkClass}>Create one</NavLink>

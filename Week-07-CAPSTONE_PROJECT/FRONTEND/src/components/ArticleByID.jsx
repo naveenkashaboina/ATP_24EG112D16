@@ -171,8 +171,8 @@ function ArticleByID() {
               className={inputClass}
               placeholder="Write your comment here..."
             />
-            <button type="submit" className="bg-amber-600 text-white px-5 py-2 rounded-2xl mt-5">
-              Add comment
+            <button type="submit" className="bg-amber-600 text-white px-5 py-2 rounded-2xl mt-5" disabled={commentLoading}>
+              {commentLoading ? "Posting..." : "Add comment"}
             </button>
           </form>
         </div>
