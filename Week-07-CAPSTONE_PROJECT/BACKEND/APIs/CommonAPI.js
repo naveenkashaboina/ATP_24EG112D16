@@ -57,56 +57,35 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res, next
 
 //Route for Login(USER, AUTHOR and ADMIN)
 commonApp.post("/login", async (req, res) => {
-  //console.log(req.body)
-  //get user cred obj
   const { email, password } = req.body;
-  //find user by email
-  const user = await userModel.findOne({ email: email });
-  //if use not found
-  if (!user) {
-    return res.status(400).json({ message: "Invalid email" });
-  }
+  const user = await userModel.findOne({ email });
+  if (!user) return res.status(400).json({ message: "Invalid email" });
+  if (!user.isUserActive) return res.status(403).json({ message: "You are blocked" });
 
-    //blocked user check
-  if (!user.isUserActive) {
-    return res.status(403).json({
-      message: "You are blocked"
-    });
-  }
-  //compare password
   const isMatched = await compare(password, user.password);
-  //if passwords not matched
-  if (!isMatched) {
-    return res.status(400).json({ message: "Invalid password" });
-  }
-  //create jwt
+  if (!isMatched) return res.status(400).json({ message: "Invalid password" });
+
   const signedToken = sign(
-    {
-      id: user._id,
-      email: email,
-      role: user.role,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      profileImageUrl: user.profileImageUrl,
-    },
+    { id: user._id, email, role: user.role, firstName: user.firstName,
+      lastName: user.lastName, profileImageUrl: user.profileImageUrl },
     process.env.SECRET_KEY,
-    {
-      expiresIn: "1h",
-    },
+    { expiresIn: "1h" }
   );
 
-  //set token to res header as httpOnly cookie
-  res.cookie("token", signedToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-  });
-  //remove password from user document
+  // REMOVE res.cookie — send token in body instead
   let userObj = user.toObject();
   delete userObj.password;
+  res.status(200).json({ message: "login success", payload: userObj, token: signedToken });
+});
 
-  //send res
-  res.status(200).json({ message: "login success", payload: userObj });
+// Logout — nothing to clear server-side anymore
+commonApp.get("/logout", (req, res) => {
+  res.status(200).json({ message: "Logout success" });
+});
+
+// check-auth — read token from Authorization header
+commonApp.get("/check-auth", verifyToken("USER", "AUTHOR", "ADMIN"), (req, res) => {
+  res.status(200).json({ message: "authenticated", payload: req.user });
 });
 
 //Route for Logout
