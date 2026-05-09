@@ -15,12 +15,13 @@ function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const [articlesRes, usersRes] = await Promise.all([
-          axios.get("http://localhost:4000/admin-api/articles", { withCredentials: true }),
-          axios.get("http://localhost:4000/admin-api/users-authors", { withCredentials: true }),
+          axios.get("https://atp-24eg112d16.onrender.com/admin-api/articles", { withCredentials: true }),
+          axios.get("https://atp-24eg112d16.onrender.com/admin-api/users-authors", { withCredentials: true }),
         ]);
         const articles = articlesRes.data.payload || [];
         const users = usersRes.data.payload  || [];

@@ -17,7 +17,7 @@ function ManageUsers() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/admin-api/users-authors", { withCredentials: true })
+      .get("https://atp-24eg112d16.onrender.com/admin-api/users-authors", { withCredentials: true })
       .then((res) => setUsers(res.data.payload || []))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
@@ -28,7 +28,7 @@ function ManageUsers() {
     setFeedback({ type: "", msg: "" });
     try {
       await axios.put(
-        "http://localhost:4000/admin-api/state",
+        "https://atp-24eg112d16.onrender.com/admin-api/state",
         { mail: email, toBeActive: !currentState },  // send boolean directly
         { withCredentials: true }
       );

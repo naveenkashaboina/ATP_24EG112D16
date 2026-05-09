@@ -15,7 +15,7 @@ function AllArticles() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/admin-api/articles", { withCredentials: true })
+      .get("https://atp-24eg112d16.onrender.com/admin-api/articles", { withCredentials: true })
       .then((res) => setArticles(res.data.payload || []))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));

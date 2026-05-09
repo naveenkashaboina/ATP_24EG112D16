@@ -32,7 +32,7 @@ function Home() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/user-api/articles", {
+        const res = await axios.get("https://atp-24eg112d16.onrender.com/user-api/articles", {
           withCredentials: true,
         });
         if (res.status === 200) {
