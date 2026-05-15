@@ -1,3 +1,5 @@
+ // Deep Copy using structuredClone
+ 
  const order = {
                   orderId: "ORD1001",
                   customer: {

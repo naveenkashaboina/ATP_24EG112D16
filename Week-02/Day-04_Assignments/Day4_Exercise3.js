@@ -1,5 +1,6 @@
 
 //write a fn that recieves any no of args
+
 function sum(...a){
     let s=a.reduce((acc,e)=>acc+e)
     return s

@@ -1,3 +1,5 @@
+// Shallow Copy using the spread operator
+
 const user = {
                 id: 101,
                 name: "Ravi",

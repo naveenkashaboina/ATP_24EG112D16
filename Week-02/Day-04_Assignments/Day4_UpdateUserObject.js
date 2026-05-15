@@ -1,3 +1,4 @@
+// Updating a user object without modifying the original
 
 let user = {
   name: "Ravi",
